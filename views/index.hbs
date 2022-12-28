@@ -1,1 +1,9 @@
-<h1>index.hbs</h1>
+{{!-- post in db --}}
+<div class="my-2">
+  <form action="/shortener" method="post">
+    <input class="border-0 my-2 py-2 bg-light" type="url" name="url" placeholder="input url..." size="40">
+    <div class="d-grid col-6 mx-auto text-center">
+      <button type="submit" class="btn btn-outline-primary my-2">Shorten</button>
+    </div>
+  </form>
+</div>
