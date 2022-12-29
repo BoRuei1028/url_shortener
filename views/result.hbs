@@ -1,10 +1,2 @@
 <p class="fs-5">Success! Please use this link:</p>
-<a href="#" target="_blank" rel="noreferrer" class="text-decoration-none">https://shortener.com/</a>
-
-{{!--
-我需要將5碼亂數以參數形式丟進這裡
-打算用串字串的方式
-{{randomString}}
-
-a tag 中的網址得從db中取得，
---}}
+<a href="{{ item.inputUrl }}" target="_blank" rel="noreferrer" class="text-decoration-none">https://shortener.com/{{ item.randomString }}</a>
