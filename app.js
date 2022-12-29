@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars')
 const mongoose = require('mongoose')
 
 const Reurl = require('./models/reurl')
+const getRandomString = require('./getRandomString')
 
 if (process.env.NODE_ENV !== "production") {
   require('dotenv').config()
@@ -21,8 +22,6 @@ db.once('open', () => {
   console.log('mongodb connect')
 })
 
-
-
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs' }))
 app.set('view engine', 'hbs')
 app.use(express.static('public'))
@@ -35,14 +34,24 @@ app.get('/', (req, res) => {
 
 app.post('/shortener', (req, res) => {
   const inputUrl = req.body.url
-  return Reurl.create({ inputUrl })
-    .then(() => res.redirect('result'))
-    .catch((error) => console.log(error))
-})
+  const randomString = getRandomString()
 
-app.get('/result', (req, res) => {
-  // 這裡我需要將5碼亂數以及正確的url準備好
-  res.render('result')
+  Reurl.findOne({ inputUrl }) //找不到 item === null
+    .lean()
+    .then((item) => {
+      if (!item) {
+      //找不到 => create and render
+      item = { inputUrl, randomString }
+      Reurl.create(item)
+      .then(() => res.render('result', { item }))
+      .catch(err => console.log(err))
+      }
+
+      //找到 => render
+      res.render('result', { item })
+      
+    })
+    .catch(err => console.log(err))
 })
 
 app.listen(port, () => {
