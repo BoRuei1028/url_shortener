@@ -1,2 +1,28 @@
 <p class="fs-5">Success! Please use this link:</p>
-<a href="{{ item.inputUrl }}" target="_blank" rel="noreferrer" class="text-decoration-none">https://shortener.com/{{ item.randomString }}</a>
+<a href="{{ item.inputUrl }}" target="_blank" rel="noreferrer" class="text-decoration-none" id="url">
+  https://shortener.com/{{ item.randomString }}
+</a>
+<div class="p-3">
+  <div class="w-100 text-center">
+    <input type="button" class="btn btn-primary" onclick="copyLink()" data-toggle="tooltip" title="Copy to Clipboard"
+      value="Copy" readonly />
+  </div>
+</div>
+
+<script>
+  function copyLink() {
+    let copyText = document.getElementById("url")
+
+    const selection = window.getSelection();
+
+    const range = document.createRange();
+
+    range.selectNodeContents(copyText);
+
+    selection.removeAllRanges();
+
+    selection.addRange(range);
+
+    document.execCommand('copy');
+  }
+</script>
