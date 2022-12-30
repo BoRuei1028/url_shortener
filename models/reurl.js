@@ -1,10 +1,12 @@
 const mongoose = require('mongoose')
-const reurlSchema = new mongoose.Schema ({
+const reurlSchema = new mongoose.Schema({
   inputUrl: {
     type: String,
+    required: true
   },
   randomString: {
-    type: String
+    type: String,
+    required: true
   }
 })
 
