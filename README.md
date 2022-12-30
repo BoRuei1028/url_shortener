@@ -31,9 +31,9 @@ npm install -g nodemon
 npm run dev 
 ```
 :arrow_right:開啟首頁
-:::info
-http://localhost:3000
-:::
+
+> http://localhost:3000
+
  
 ### How to use
 1. 輸入想要縮短的網址
