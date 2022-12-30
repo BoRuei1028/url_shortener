@@ -35,21 +35,20 @@ app.get('/', (req, res) => {
 app.post('/shortener', (req, res) => {
   const inputUrl = req.body.url
   const randomString = getRandomString()
-
   Reurl.findOne({ inputUrl }) //找不到 item === null
     .lean()
     .then((item) => {
       if (!item) {
-      //找不到 => create and render
-      item = { inputUrl, randomString }
-      Reurl.create(item)
-      .then(() => res.render('result', { item }))
-      .catch(err => console.log(err))
+        //找不到 => create and render
+        item = { inputUrl, randomString }
+        return Reurl.create(item)
+          .then(() => res.render('result', { item }))
+          .catch(err => console.log(err))
       }
 
       //找到 => render
       res.render('result', { item })
-      
+
     })
     .catch(err => console.log(err))
 })
@@ -57,3 +56,4 @@ app.post('/shortener', (req, res) => {
 app.listen(port, () => {
   console.log('listening')
 })
+
