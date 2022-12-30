@@ -1,13 +1,11 @@
-{{!-- post in db --}}
-
-<form action="/shortener" method="post" class="">
+<form action="/shortener" method="post" class="needs-validation was-validated" novalidate>
   <div class="mb-3">
-    <input class="form-control border-0 py-2 bg-light " type="url" name="url" id="url"
-      placeholder="Input URL here..." size="50" style="outline: none;" required>
+    <input class="form-control bg-light border-0 p-2" type="url" name="url" id="url" placeholder="Input URL here..."
+      size="50" style="outline: none;" required>
+    <div class="valid-feedback">OK</div>
+    <div class="invalid-feedback">This field is required</div>
   </div>
   <div class="d-grid col-6 mx-auto">
     <button type="submit" class="btn btn-outline-primary my-2" title="縮網址產生器">Shorten</button>
   </div>
 </form>
-
-{{!-- 希望在按下按鈕後在驗證 --}}
