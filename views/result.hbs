@@ -7,29 +7,16 @@
   <div class="w-100 text-center">
     <input type="button" class="btn btn-primary" id="btn-copy" data-toggle="tooltip" title="Copy to Clipboard"
       value="Copy" readonly />
+    <div class="mt-2">
+      <small>點擊圖片返回</small>
+    </div>
   </div>
 </div>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // DOM Ready!
-    const button = document.querySelector('#btn-copy')
-    button.addEventListener('click', copyLink)
-  });
-
-  function copyLink() {
-    let copyText = document.getElementById("url")
-
-    const selection = window.getSelection();
-
-    const range = document.createRange();
-
-    range.selectNodeContents(copyText);
-
-    selection.removeAllRanges();
-
-    selection.addRange(range);
-
-    document.execCommand('copy');
-  }
-</script>
+<script type="text/javascript" src="/javascripts/resultPage_copyFunction.js"></script>
+{{!--
+寫成 src="/public/javascripts/resultPage_copyFunction.js"，
+DevTool: Refused to execute script from 'http://localhost:3000/public/javascripts/resultPage_copyFunction.js' because
+its MIME
+type ('text/html') is not executable, and strict MIME type checking is enabled.
+--}}
