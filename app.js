@@ -32,14 +32,14 @@ app.get('/', (req, res) => {
   res.render('index')
 })
 
-app.post('/shortener', (req, res) => {
+app.post('/', (req, res) => {
   const inputUrl = req.body.url
   const randomString = getRandomString()
-  Reurl.findOne({ inputUrl }) //找不到 item === null
+  Reurl.findOne({ inputUrl })
     .lean()
     .then((item) => {
-      if (!item) {
-        //找不到 => create and render
+      //找不到 => item === null => create => render
+      if (!item) { 
         item = { inputUrl, randomString }
         return Reurl.create(item)
           .then(() => res.render('result', { item }))
@@ -48,8 +48,14 @@ app.post('/shortener', (req, res) => {
 
       //找到 => render
       res.render('result', { item })
-
     })
+    .catch(err => console.log(err))
+})
+
+app.get('/shortener/:randomString', (req, res) => {
+  const randomString = req.params.randomString
+  Reurl.findOne({ randomString })
+    .then((filterData) => res.redirect(`${filterData.inputUrl}`))
     .catch(err => console.log(err))
 })
 
