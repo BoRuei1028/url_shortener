@@ -28,4 +28,11 @@ router.post('/', (req, res) => {
     .catch(err => console.log(err))
 })
 
+router.get('/:randomString', (req, res) => {
+  const randomString = req.params.randomString
+  Reurl.findOne({ randomString })
+    .then((filterData) => res.redirect(`${filterData.inputUrl}`))
+    .catch(err => console.log(err))
+})
+
 module.exports = router
