@@ -1,6 +1,6 @@
 短網址產生器
 ==
-![](https://i.imgur.com/FFYGeXv.png)
+![](https://i.imgur.com/rhs4Y5F.png)
 
 ### Features 功能
 1. 使用者可以輸入想要縮短的網址
